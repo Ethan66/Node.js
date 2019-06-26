@@ -1,0 +1,22 @@
+{
+  "name": "Node.js",
+  "version": "1.0.0",
+  "description": "``` $node let a = 1 let b = 2 console.log(a+b) // 3 就跟控制台是一样的",
+  "main": "common.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ethan66/Node.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ethan66/Node.js/issues"
+  },
+  "homepage": "https://github.com/Ethan66/Node.js#readme"
+}

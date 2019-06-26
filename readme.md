@@ -5,9 +5,25 @@ let a = 1
 let b = 2
 console.log(a+b) // 3 就跟控制台是一样的
 
-热更新
+热更新问题
 npm i -g supervisor
 执行 supervisor http.js
+
+commonJs问题
+node_modules引入可以直接用文件名
+
+node_modules多层嵌套怎么直接用文件名？
+// - node_modules
+// -- nav
+// ---- navTop.js
+// 怎么直接require('navTop')？
+
+答：进入nav目录，直接npm init -y，生成package.json，会直接读取里面的入口文件执行相对应得文件。
+
+package.jsonr版本号问题
+^表示第一位版本号不变，后面两位最新
+~表示前两位不变，最后一位取最新
+*表示全部取最新
 ```
 
 ### Node.js开篇
@@ -23,6 +39,7 @@ Node.js不为每个客户连接创建一个新的线程,而仅仅使用一个线
 
 ##### Node.js不仅可以实现应用，还实现了整个HTTP服务器
 > 如果我们使用 PHP 来编写后端的代码时,需要 Apache 或者 Nginx 的 HTTP 服务器,来处理客户端的请求相应。但是Node.js只需要引入HTTP模块就可以了。
+常见web服务器：Apache,Nginx,IIS
 
 ### Node.js模块
 ##### HTTP模块启动HTTP服务器
@@ -87,4 +104,17 @@ console.log(obj1)
 }
 ```
 
-##### CommonJS自定义模块
+##### fs模块（操作服务器上的文件）
+```
+// 增删改查等功能（具体看文件）
+let fs = require('fs')
+
+fs.stat('html', (err, stats) => {  // 检测我们的文件
+  if (err) {
+    console.log('err', err)
+    return false
+  }
+  console.log('文件', stats.isFile()) // 是否是文件
+  console.log('目录', stats.isDirectory()) // 是否是目录
+})
+```
