@@ -1,9 +1,4 @@
-let http = require('http')
-let fs = require('fs')
-let path = require('path')
-let url = require('url')
-
-http.createServer((req, res) => {
+exports.router = function(req, res) {
   let pathname = url.parse(req.url).pathname
   if (pathname === '/') {
     pathname = '/index.html'
@@ -24,18 +19,5 @@ http.createServer((req, res) => {
         res.end()
       }
     })
-  }
-}).listen(8001)
-
-function getMime (extname) {
-  switch (extname) {
-    case '.html': 
-      return 'text/html'
-    case '.css':
-      return 'text/css'
-    case '.js':
-      return 'text/javascript'
-    default:
-      return 'text/html'
   }
 }

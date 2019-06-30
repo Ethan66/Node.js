@@ -118,3 +118,23 @@ fs.stat('html', (err, stats) => {  // 检测我们的文件
   console.log('目录', stats.isDirectory()) // 是否是目录
 })
 ```
+
+##### Nodejs events模块处理异步
+> node.js有很多异步操作，如何拿到异步的数据
+```
+let events = require('events')
+let EventEmitter = new events.EventEmitter() // 实例化事件对象
+// 广播和接收广播
+
+// 监听to_parent的广播
+EventEmitter.on('to_parent', function(data){
+  console.log('接收到了广播事件')
+  console.log(data)
+})
+
+setTimeout(function(){
+  console.log('开始广播')
+  // 广播
+  EventEmitter.emit('to_parent', '发送的数据')
+}, 2000)
+```

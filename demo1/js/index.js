@@ -1,0 +1,1 @@
+document.querySelector('.content').style.cssText = 'background: #888;'
