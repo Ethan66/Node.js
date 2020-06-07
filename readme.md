@@ -1,3 +1,6 @@
+### 课堂笔记
+Node.js入门实战视频教程（39讲-IT营大地）- 2017.6
+
 ### Node.js小技巧
 ```
 $node
@@ -10,6 +13,8 @@ npm i -g supervisor
 执行 supervisor http.js
 
 commonJs问题
+// CommonJs使Node.js的代码进行模块化分类。
+// 抛出：module.exports = obj, 引入：let obj = require('obj'); console.log(obj)
 node_modules引入可以直接用文件名
 
 node_modules多层嵌套怎么直接用文件名？
@@ -18,12 +23,19 @@ node_modules多层嵌套怎么直接用文件名？
 // ---- navTop.js
 // 怎么直接require('navTop')？
 
-答：进入nav目录，直接npm init -y，生成package.json，会直接读取里面的入口文件执行相对应得文件。
+
+答：正常引入方式，require('nav/navTop'); 其他引入方式：进入nav目录，直接npm init -y，生成package.json，会直接读取里面的入口文件执行相对应得文件。
 
 package.jsonr版本号问题
 ^表示第一位版本号不变，后面两位最新
 ~表示前两位不变，最后一位取最新
 *表示全部取最新
+
+"prefs": "node FS/clear.js", // 因为加了pre，所以执行npm run fs的时候先执行prefs
+"fs": "node FS"
+
+npm list // 查看当前目录安装包list
+npm view vue versions // 查看vue所有安装版本
 ```
 
 ### Node.js开篇
@@ -42,82 +54,35 @@ Node.js不为每个客户连接创建一个新的线程,而仅仅使用一个线
 常见web服务器：Apache,Nginx,IIS
 
 ### Node.js模块
-##### HTTP模块启动HTTP服务器
+##### HTTP和url模块
+npm run HTTP
+
+##### FS模块
+npm run fs
 ```
-// http.js文件
-var http = require('http') // 引入模块
-// req:获取url信息
-// res浏览器响应信息
-http.createServer(function(req, res){ // 创建HTTP服务器
+const fs = require('fs')
+const fs1 = require('fs-extra') // fs的扩展，比如清空文件夹
 
-  if (req.url!=='/favicon.ico') { // 因为当前有2个请求，其中一个是/favicon.ico
-    console.log(req.url) // 获取当前页面的url（除去host）信息
-    var query = url.parse(req.url, true) // 解析当前url获取get参数
-    console.log(query.query.aid)
-  }
+// 记忆点：1、读取内容，读取文件，检测文件有data，其他都没有。
+2、dir不需要驼峰
 
-  // 设置响应的HTTP头，状态码为200，文件类型是html,字符集是utf-8
-  res.writeHead(200, {"content-Type": "text/html;charset='utf-8'"})
-
-  res.write('hello') // 书写到页面中，跟document.write()差不多
-
-  res.end() // 结束响应
-}).listen(8001) // 用listen设置端口号
-
-// 启动服务器: $ node http.js
+// fs.stat // 检测文件是目录还是对象
+// fs.mkdir // 创建目录
+// fs.writeFile // 覆盖内容，文件不存在先创建再写入
+// fs.appendFile // 追加内容
+// fs.readdir // 读取目录下的所有一级目录(包括文件)
+// fs.readFile // 读取文件内容
+// fs.rename // 重命名, 剪切文件
+// fs.rmdir // 删除目录
+// fs.unlink // 删除文件
 ```
 
-##### url模块
-```
-let url = require('url')
-let obj = url.parse('http://www.baidu.com/news?name=zhangsan') // 用来解析url
-console.log(obj)
-// {
-  protocol: 'http:',
-  slashes: true,
-  auth: null,
-  host: 'www.baidu.com',
-  port: null,
-  hostname: 'www.baidu.com',
-  hash: null,
-  search: '?name=zhangsan',
-  query: 'name=zhangsan',
-  pathname: '/nes',
-  path: '/nes?name=zhangsan',
-  href: 'http://www.baidu.com/nes?name=zhangsan'
-}
-let obj1 =  url.parse('http://www.baidu.com/news?name=zhangsan', true) // 将query转为对象
-console.log(obj1)
-// {
-  protocol: 'http:',
-  slashes: true,
-  auth: null,
-  host: 'www.baidu.com',
-  port: null,
-  hostname: 'www.baidu.com',
-  hash: null,
-  search: '?name=zhangsan',
-  query: [Object: null prototype] { name: 'zhangsan' },
-  pathname: '/nes',
-  path: '/nes?name=zhangsan',
-  href: 'http://www.baidu.com/nes?name=zhangsan'
-}
-```
+##### FS文件流
+npm run fs2
+针对文件比较大的情况，用file读取会卡
 
-##### fs模块（操作服务器上的文件）
-```
-// 增删改查等功能（具体看文件）
-let fs = require('fs')
-
-fs.stat('html', (err, stats) => {  // 检测我们的文件
-  if (err) {
-    console.log('err', err)
-    return false
-  }
-  console.log('文件', stats.isFile()) // 是否是文件
-  console.log('目录', stats.isDirectory()) // 是否是目录
-})
-```
+##### 创建静态web服务器
+npm run web
 
 ##### Nodejs events模块处理异步
 > node.js有很多异步操作，如何拿到异步的数据
