@@ -17,7 +17,7 @@ http.createServer((req, res) => { // 创建HTTP服务器: req:获取url信息 re
     <li><span style="color: #666;">url.hostname: </span><span>${baidu.hostname}</span></li>
     <li><span style="color: #666;">url.query: </span><span>${JSON.stringify(baidu.query)}</span></li>
     <li><span style="color: #666;">url.path: </span><span>${baidu.path}</span></li>
-    <li><span style="color: #666;">url.path: </span><span>${baidu.pathname}</span></li>
+    <li><span style="color: #666;">url.pathname: </span><span>${baidu.pathname}</span></li>
     <li><span style="color: #666;">url.href: </span><span>${baidu.href}</span></li>
   </ul>`)
 
@@ -28,7 +28,7 @@ http.createServer((req, res) => { // 创建HTTP服务器: req:获取url信息 re
     <li><span style="color: #666;">url.hostname: </span><span>${currentUrl.hostname}</span></li>
     <li><span style="color: #666;">url.query: </span><span>${JSON.stringify(currentUrl.query)}</span></li>
     <li><span style="color: #666;">url.path: </span><span>${currentUrl.path}</span></li>
-    <li><span style="color: #666;">url.path: </span><span>${currentUrl.pathname}</span></li>
+    <li><span style="color: #666;">url.pathname: </span><span>${currentUrl.pathname}</span></li>
     <li><span style="color: #666;">url.href: </span><span>${currentUrl.href}</span></li>
   </ul>`)
   }
